@@ -193,33 +193,55 @@ Use this skeleton when you replace challenge instructions with the finished anal
 
 - **Purpose:** Answer where and when Patrick should schedule himself to maximize cars fixed (and thus revenue), given one shop per day.
 - **Data in scope:** 250 daily rows in `carsFixed.csv`: `shopID` (1–5), `boss` (0 = absent, 1 = present), `carsFixed` (cars repaired that day).
+- **Evidence:** Usually **no chart yet**—one short paragraph only. Optionally a tiny **table of contents for figures** if the report grows past two pages (otherwise skip).
+
+### Where graphs and tables belong (general rule)
+
+- Put each figure or table **immediately after** the paragraph that states the claim it supports—not bundled at the end of the document.
+- In Quarto, use `#| label:` and `#| fig-cap:` / `#| tbl-cap:` so Patrick sees a clear title on every graphic or summary table.
+- In the prose, point to the evidence in plain language (“The scatterplot below shows all 250 days…”) so the story reads top-to-bottom.
+- **Opening vs proof:** Save detailed plots for Sections **1–4**; the Opening sets context only.
 
 ### 1. What does the data show?
 
 - **Full historical picture:** One visualization that shows **all 250 observations** (e.g., jitter, transparency, or faceting) so overlap does not hide days.
 - **By shop and boss:** Compare productivity when Patrick is present vs absent at each `shopID`.
 - **Main takeaway:** Which shops gain the most from his presence, which gain little, and which patterns stand out (including any nuance for Shop 3 if it matters to the story).
+- **Evidence (typical order in the finished report):**
+  - **Figure 1 — All 250 days:** Strip/swarm/scatter or faceted plot with every row visible (required rubric item). Place this **first** in Section 1 so Patrick sees the full history before summaries.
+  - **Figure 2 (optional if merged into Fig 1):** Same data summarized visually by shop—e.g., side-by-side or overlaid distributions for `boss = 0` vs `boss = 1` **within each `shopID`** (violin, box, or jittered points by shop).
+  - **Table 1 (optional but helpful):** Compact counts and means (and maybe standard deviation) by `shopID` × `boss`—supports your sentences about “which shop jumps the most.” You already have summary code earlier in this document; reuse that logic here when you write the final report.
 
 ### 2. What should Patrick do?
 
 - **Scheduling priorities:** Specific guidance—which shops deserve more of his days and which need him less (or not based on the data).
 - **Financial angle:** Translate cars fixed into revenue (assume a simple dollars-per-car rate and state it clearly) and summarize upside of better scheduling in everyday terms.
 - **Action list:** Short, numbered “do this next week / this month” items Patrick can follow without rereading the whole report.
+- **Evidence:**
+  - **Figure or Table — “Lift” by shop:** One graphic or small table showing the **difference** in average `carsFixed` (present minus absent, or ratio) **per shop**—this directly backs “prioritize Shop X.”
+  - **Table — Dollars (optional):** Same priorities translated to revenue/profit using your stated rate—place **right under** the paragraph where you first mention dollars.
 
 ### 3. How confident can Patrick be?
 
 - **Sample size:** Plain-language reminder that 250 days is useful but not huge—patterns can shift.
 - **Ranges, not just points:** Describe how big differences might reasonably be (e.g., rough bands or intervals) so Patrick knows what swing to expect.
 - **Honest limits:** What could make the plan wrong (seasonality, staff changes, special events). State assumptions in one short paragraph.
+- **Evidence:**
+  - **Figure — Uncertainty:** Error bars, bootstrap intervals, or simple “low / middle / high” scenario bands **per shop** (or for the lifts you recommended). Place this **after** you introduce why raw averages aren’t guaranteed for every future week.
+  - **Table (optional):** Sample sizes per shop × boss so Patrick sees which comparisons rest on fewer boss-present days.
 
 ### 4. What does the future look like?
 
 - **Scenarios:** At least **one** chart comparing projected cars (or revenue) under a few concrete schedules (e.g., “more days at Shop X,” “status quo,” “favor brother’s shop”).
 - **Bridge to decision:** Tie the scenario chart back to the recommendations in Section 2.
+- **Evidence:**
+  - **Figure — Scenarios (required):** Bar or line chart of **projected** total cars (or revenue) over a planning horizon for **2–4 scheduling policies**. Put this figure **after** you name the scenarios in words (“If Patrick spends half his days at…”).
+  - Refer back to **Figure/table from Section 2** in one sentence so Patrick connects “what we saw” to “what we expect if we change the calendar.”
 
 ### Closing
 
 - **Bottom line:** One tight summary—what to schedule, what to watch, and when to revisit the analysis.
+- **Evidence:** Normally **no new charts**—refer to Figure numbers already shown so the ending stays punchy.
 
 ---
 
