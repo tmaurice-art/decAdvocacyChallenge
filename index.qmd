@@ -185,6 +185,46 @@ Your report should answer these questions in a clear, concise way:
 
 **Remember:** Less is more. A focused, punchy report that Patrick can understand and act on is better than a long, complex analysis that confuses him.
 
+## Report outline (for your final Patrick-facing report)
+
+Use this skeleton when you replace challenge instructions with the finished analysis. Keep it short (about 1–5 printed pages), plain language, and focused on decisions.
+
+### Opening
+
+- **Purpose:** Answer where and when Patrick should schedule himself to maximize cars fixed (and thus revenue), given one shop per day.
+- **Data in scope:** 250 daily rows in `carsFixed.csv`: `shopID` (1–5), `boss` (0 = absent, 1 = present), `carsFixed` (cars repaired that day).
+
+### 1. What does the data show?
+
+- **Full historical picture:** One visualization that shows **all 250 observations** (e.g., jitter, transparency, or faceting) so overlap does not hide days.
+- **By shop and boss:** Compare productivity when Patrick is present vs absent at each `shopID`.
+- **Main takeaway:** Which shops gain the most from his presence, which gain little, and which patterns stand out (including any nuance for Shop 3 if it matters to the story).
+
+### 2. What should Patrick do?
+
+- **Scheduling priorities:** Specific guidance—which shops deserve more of his days and which need him less (or not based on the data).
+- **Financial angle:** Translate cars fixed into revenue (assume a simple dollars-per-car rate and state it clearly) and summarize upside of better scheduling in everyday terms.
+- **Action list:** Short, numbered “do this next week / this month” items Patrick can follow without rereading the whole report.
+
+### 3. How confident can Patrick be?
+
+- **Sample size:** Plain-language reminder that 250 days is useful but not huge—patterns can shift.
+- **Ranges, not just points:** Describe how big differences might reasonably be (e.g., rough bands or intervals) so Patrick knows what swing to expect.
+- **Honest limits:** What could make the plan wrong (seasonality, staff changes, special events). State assumptions in one short paragraph.
+
+### 4. What does the future look like?
+
+- **Scenarios:** At least **one** chart comparing projected cars (or revenue) under a few concrete schedules (e.g., “more days at Shop X,” “status quo,” “favor brother’s shop”).
+- **Bridge to decision:** Tie the scenario chart back to the recommendations in Section 2.
+
+### Closing
+
+- **Bottom line:** One tight summary—what to schedule, what to watch, and when to revisit the analysis.
+
+---
+
+*When the report is final for Patrick, remove this outline section along with the rest of the challenge instructions, rubric, and checklist so the HTML contains only analysis, visuals, and recommendations.*
+
 ## Technical Implementation Preferences 💡
 
 ### Setting Up Your Analysis
