@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,18 +58,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-bb462d781dde1847d9e3ccf7736099dd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<link href="index_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -102,23 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="decision-advocacy-challenge---patricks-auto-shop-analysis" class="level1">
-<h1>🔧 Decision Advocacy Challenge - Patrick’s Auto Shop Analysis</h1>
-<section id="challenge-overview" class="level2">
-<h2 class="anchored" data-anchor-id="challenge-overview">Challenge Overview</h2>
-<p><strong>Your Mission:</strong> Create a concise, punchy Quarto document (aim for 1-5 printed pages) that analyzes historical productivity data from Patrick’s auto shop network. Your report should give Patrick clear, actionable recommendations he can understand and use. Write it so an auto-mechanic can follow it—no jargon, no confusion, no boredom. Then render the document to HTML and deploy it via GitHub Pages.</p>
-<p><strong>Key Requirements:</strong></p>
-<ul>
-<li><strong>Simplicity:</strong> Patrick is an auto-mechanic, not a statistician. Write so he can understand.</li>
-<li><strong>Conciseness:</strong> 1-5 printed pages. Get to the point.</li>
-<li><strong>Beautiful visualizations:</strong> Show all 250 data points clearly.</li>
-<li><strong>Logical recommendations:</strong> Defensible advice based on the data.</li>
-<li><strong>Confidence assessment:</strong> Explain uncertainty in plain terms. We only have 250 days of data—that’s not a lot. Help Patrick understand what ranges of differences he can expect.</li>
-</ul>
-</section>
-<section id="the-business-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-business-problem">The Business Problem 🎯</h2>
-<p>Patrick runs a network of 5 auto repair shops. He’s been tracking productivity data (number of cars fixed per day) across all shops, along with whether he (the boss) was present at each shop on each day.</p>
 <p><strong>The Core Question:</strong> When and where should Patrick schedule his presence to maximize productivity and revenue?</p>
 <p><strong>Key Considerations:</strong></p>
 <ul>
@@ -134,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🎯 The Key Insight: Data-Driven Decision Making
+<span class="screen-reader-only">Important</span>🎯 The Key Insight: Data-Driven Decision Making
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -153,12 +137,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>The connection:</strong> This is a real-world decision problem where data analysis can directly impact business outcomes. Your job is to make the data tell a clear, actionable story.</p>
 </div>
 </div>
-</section>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The Data 📊</h2>
 <p>The dataset contains 250 observations of daily productivity across 5 shops:</p>
 <div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>carsDF.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>carsDF.head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-data-overview" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -169,7 +152,7 @@ Table&nbsp;1: Overview of the productivity data
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -181,70 +164,70 @@ Table&nbsp;1: Overview of the productivity data
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
+<th data-quarto-table-cell-role="th">0</th>
 <td>1</td>
 <td>1</td>
 <td>0</td>
 <td>8</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>2</td>
 <td>2</td>
 <td>0</td>
 <td>22</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
+<th data-quarto-table-cell-role="th">2</th>
 <td>3</td>
 <td>3</td>
 <td>0</td>
 <td>32</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<th data-quarto-table-cell-role="th">3</th>
 <td>4</td>
 <td>4</td>
 <td>1</td>
 <td>64</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
+<th data-quarto-table-cell-role="th">4</th>
 <td>5</td>
 <td>5</td>
 <td>0</td>
 <td>53</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
+<th data-quarto-table-cell-role="th">5</th>
 <td>6</td>
 <td>1</td>
 <td>1</td>
 <td>21</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<th data-quarto-table-cell-role="th">6</th>
 <td>7</td>
 <td>2</td>
 <td>0</td>
 <td>20</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<th data-quarto-table-cell-role="th">7</th>
 <td>8</td>
 <td>3</td>
 <td>0</td>
 <td>42</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<th data-quarto-table-cell-role="th">8</th>
 <td>9</td>
 <td>4</td>
 <td>0</td>
 <td>31</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
+<th data-quarto-table-cell-role="th">9</th>
 <td>10</td>
 <td>5</td>
 <td>0</td>
@@ -267,8 +250,8 @@ Table&nbsp;1: Overview of the productivity data
 <li><code>carsFixed</code>: Number of cars fixed that day</li>
 </ul>
 <div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> carsDF.groupby([<span class="st">'shopID'</span>, <span class="st">'boss'</span>])[<span class="st">'carsFixed'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'std'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>]).<span class="bu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> carsDF.groupby([<span class="st">'shopID'</span>, <span class="st">'boss'</span>])[<span class="st">'carsFixed'</span>].agg([<span class="st">'count'</span>, <span class="st">'mean'</span>, <span class="st">'std'</span>, <span class="st">'min'</span>, <span class="st">'max'</span>]).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-data-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-data-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -279,7 +262,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <div>
 
 
-<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe do-not-create-environment cell caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -302,8 +285,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 </thead>
 <tbody>
 <tr class="odd">
-<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">1</td>
-<td data-quarto-table-cell-role="th">0</td>
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">1</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>40</td>
 <td>11.05</td>
 <td>2.93</td>
@@ -311,7 +294,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>17</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>10</td>
 <td>18.00</td>
 <td>3.13</td>
@@ -319,8 +302,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>23</td>
 </tr>
 <tr class="odd">
-<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">2</td>
-<td data-quarto-table-cell-role="th">0</td>
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">2</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>45</td>
 <td>22.13</td>
 <td>4.82</td>
@@ -328,7 +311,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>35</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>5</td>
 <td>32.20</td>
 <td>2.59</td>
@@ -336,8 +319,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>35</td>
 </tr>
 <tr class="odd">
-<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">3</td>
-<td data-quarto-table-cell-role="th">0</td>
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">3</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>35</td>
 <td>32.46</td>
 <td>5.59</td>
@@ -345,7 +328,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>49</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>15</td>
 <td>35.40</td>
 <td>5.00</td>
@@ -353,8 +336,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>44</td>
 </tr>
 <tr class="odd">
-<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">4</td>
-<td data-quarto-table-cell-role="th">0</td>
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">4</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>45</td>
 <td>37.02</td>
 <td>5.61</td>
@@ -362,7 +345,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>51</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>5</td>
 <td>49.80</td>
 <td>10.08</td>
@@ -370,8 +353,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>64</td>
 </tr>
 <tr class="odd">
-<td rowspan="2" data-quarto-table-cell-role="th" data-valign="top">5</td>
-<td data-quarto-table-cell-role="th">0</td>
+<th rowspan="2" data-quarto-table-cell-role="th" data-valign="top">5</th>
+<th data-quarto-table-cell-role="th">0</th>
 <td>35</td>
 <td>45.51</td>
 <td>7.24</td>
@@ -379,7 +362,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <td>60</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
+<th data-quarto-table-cell-role="th">1</th>
 <td>15</td>
 <td>53.73</td>
 <td>5.31</td>
@@ -395,6 +378,131 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 </figure>
 </div>
 </div>
+<p>The chart below plots <strong>every day</strong> in the dataset: each dot is one observation. Shops sit along the horizontal axis; vertical position is how many cars were fixed that day. Blue dots are days Patrick was elsewhere; orange dots are days he was at that shop.</p>
+<div id="cell-fig-cars-all-days" class="cell" data-fig-height="6" data-fig-width="10" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sns.stripplot(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>carsDF,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"shopID"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"carsFixed"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"boss"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    dodge<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    jitter<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.65</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"#4C78A8"</span>, <span class="dv">1</span>: <span class="st">"#F58518"</span>},</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Shop ID"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Cars fixed that day"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>handles, _ <span class="op">=</span> ax.get_legend_handles_labels()</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax.legend(handles, [<span class="st">"Patrick absent"</span>, <span class="st">"Patrick present"</span>], title<span class="op">=</span><span class="st">""</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-cars-all-days" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cars-all-days-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-cars-all-days-output-1.png" width="944" height="560" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cars-all-days-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Cars fixed per day by shop and whether Patrick was on site (all 250 observations)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="findings-and-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="findings-and-recommendations">Findings and recommendations</h2>
+<section id="what-the-data-shows" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-data-shows">What the data shows</h3>
+<p>The summary table (<a href="#tbl-data-summary" class="quarto-xref">Table&nbsp;2</a>) and the strip plot of all 250 days (<a href="#fig-cars-all-days" class="quarto-xref">Figure&nbsp;1</a>) tell a consistent story: <strong>Patrick’s presence raises cars fixed at every shop</strong>, but the <strong>size of that bump is not the same everywhere</strong>.</p>
+<ul>
+<li><strong>Shop 4</strong> shows the largest average gain when you are on site: about <strong>13 more cars per day</strong> when you are there versus when you are away (roughly 37 cars absent vs 50 present). The orange cloud sits clearly above the blue cloud in the plot.</li>
+<li><strong>Shop 2</strong> is next, with about <strong>10 more cars per day</strong> on average when you are there (roughly 22 vs 32).</li>
+<li><strong>Shop 5</strong> gains about <strong>8 cars per day</strong> on average (roughly 46 vs 54).</li>
+<li><strong>Shop 1</strong> gains about <strong>7 cars per day</strong> on average (roughly 11 vs 18).</li>
+<li><strong>Shop 3</strong> (your brother’s shop) still improves when you visit—about <strong>3 more cars per day</strong> on average (roughly 32 vs 35)—but that is the <strong>smallest lift</strong> in the group. Many absent days at Shop 3 are already as productive as some present days elsewhere.</li>
+</ul>
+<p>If you think in terms of the <strong>whole five-shop day</strong> (you can only be at one shop), the data also suggests <strong>where</strong> you show up matters for <strong>total cars across all shops</strong> in a day: using the long-run averages, a day where you work at <strong>Shop 4</strong> lines up with the highest expected <strong>fleet-wide</strong> total, because Shop 4’s jump is large while the other shops still run near their “you’re elsewhere” baselines.</p>
+<div id="cell-fig-lift-by-shop" class="cell" data-fig-height="5" data-fig-width="8" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div id="fig-lift-by-shop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lift-by-shop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-lift-by-shop-output-1.png" width="752" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lift-by-shop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Average extra cars fixed on days Patrick is present versus absent (lift), by shop
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-lift-by-shop" class="quarto-xref">Figure&nbsp;2</a> makes the ranking obvious: <strong>4, 2, 5, 1, 3</strong> from highest lift to lowest.</p>
+</section>
+<section id="what-patrick-should-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-patrick-should-do">What Patrick should do</h3>
+<p><strong>Scheduling priority (productivity-first):</strong> Put the bulk of your on-site days toward <strong>Shop 4</strong>, then <strong>Shop 2</strong>, then <strong>Shop 5</strong>, then <strong>Shop 1</strong>, and treat <strong>Shop 3</strong> as the lowest priority <strong>if the goal is maximizing cars fixed</strong>. That does <strong>not</strong> say Shop 3 is “bad”—it says the data shows the <strong>marginal gain</strong> from your being there is smaller than at the other shops.</p>
+<p><strong>Money (illustrative):</strong> If you use a simple rule of thumb like <strong>$200 revenue per car</strong> (swap in your real number), then an <strong>extra 10 cars</strong> in a day is about <strong>$2,000</strong> more revenue that day. A sustained lift of ~13 cars at Shop 4 is on the order of <strong>$2,600</strong> more revenue on a typical “you’re there” day versus a typical “you’re away” day—<strong>before</strong> costs—so stacking more high-lift days is where the upside concentrates.</p>
+<p><strong>Practical next steps:</strong></p>
+<ol type="1">
+<li><strong>Bias the calendar toward Shop 4</strong> when nothing unusual is going on (staffing, emergencies, family events).</li>
+<li><strong>Keep Shop 2 and Shop 5</strong> as regular second-tier visits so those larger lifts do not get starved.</li>
+<li><strong>Use Shop 3 for relationship time</strong> when you want to see your brother, but know you are <strong>leaving measurable cars-and-dollars on the table</strong> compared with spending that same day at Shop 4 or Shop 2—trade that off on purpose, not by accident.</li>
+</ol>
+</section>
+<section id="how-confident-can-patrick-be" class="level3">
+<h3 class="anchored" data-anchor-id="how-confident-can-patrick-be">How confident can Patrick be?</h3>
+<p>You have <strong>250 days</strong> total. That is enough to see <strong>directions</strong> (who benefits more), but not enough to treat every average as exact forever.</p>
+<ul>
+<li>The <strong>noisiest estimates</strong> are where you have <strong>few boss-present days</strong> in the history: <strong>Shop 2 and Shop 4 each only have 5 “you were there” days</strong> in this file. Averages from five days can move a lot if one week was unusual.</li>
+<li><strong>Shops 1, 3, and 5</strong> have <strong>10–15</strong> present-day rows each, which is more stable, but still not “forever true.”</li>
+</ul>
+<p>The bootstrap chart below resamples your own data many times and shows a <strong>plausible range</strong> for each shop’s lift (rough “low to high” band). Wider bands mean “expect more swing week to week.”</p>
+<div id="cell-fig-lift-bootstrap" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div id="fig-lift-bootstrap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lift-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-lift-bootstrap-output-1.png" width="848" height="464" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lift-bootstrap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Bootstrap 90% intervals for average lift (present minus absent) by shop—wider means less certainty from this sample
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>What could make this wrong later:</strong> staffing changes, a big customer next door to one shop, seasonality, or a run of “lucky” weeks in the sample. Revisit the chart <strong>once or twice a year</strong> or after any major change.</p>
+</section>
+<section id="what-the-future-could-look-like-simple-scenarios" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-future-could-look-like-simple-scenarios">What the future could look like (simple scenarios)</h3>
+<p>The scenario chart compares <strong>expected total cars fixed across all five shops over 50 workdays</strong> under a few clear policies. Each day you pick a shop to visit (everyone else runs without you). Expected cars that day for the whole group uses each shop’s long-run average with you <strong>present</strong> at the visited shop and <strong>absent</strong> everywhere else (same logic as the fleet-wide totals computed from <a href="#tbl-data-summary" class="quarto-xref">Table&nbsp;2</a>).</p>
+<div id="cell-fig-scenarios-fleet" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div id="fig-scenarios-fleet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-scenarios-fleet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-scenarios-fleet-output-1.png" width="843" height="465" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scenarios-fleet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Illustrative 50-day totals: expected fleet cars under different ways to allocate Patrick’s on-site days
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-scenarios-fleet" class="quarto-xref">Figure&nbsp;4</a> is not a forecast with weather-grade precision—it is a <strong>straight-line projection</strong> using your historical averages. Still, it answers Patrick’s “what if I changed the calendar?” question in plain terms: <strong>moving weight toward Shop 4</strong> shows the largest jump in expected fleet output among these options, while <strong>tilting extra days to Shop 3</strong> drags expected totals <strong>down</strong> relative to a more balanced or Shop-4-heavy plan.</p>
+</section>
+<section id="bottom-line" class="level3">
+<h3 class="anchored" data-anchor-id="bottom-line">Bottom line</h3>
+<p>The data supports a <strong>productivity-first</strong> schedule that <strong>overweights Shop 4</strong>, keeps <strong>Shop 2 and Shop 5</strong> in regular rotation, and treats <strong>Shop 3</strong> as a <strong>personal</strong> rather than <strong>productivity</strong> priority. Uncertainty is real—especially for Shops <strong>2</strong> and <strong>4</strong> where you have few “present” days on record—so use these results as a <strong>strong default</strong>, not an unbreakable rule, and refresh when the business changes.</p>
+</section>
 </section>
 <section id="challenge-requirements" class="level2">
 <h2 class="anchored" data-anchor-id="challenge-requirements">Challenge Requirements 📋</h2>
@@ -425,7 +533,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📁 Quick Start
+<span class="screen-reader-only">Important</span>📁 Quick Start
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -441,7 +549,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-💡 Why This Approach?
+<span class="screen-reader-only">Tip</span>💡 Why This Approach?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -463,7 +571,7 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📊 What You’re Really Being Graded On
+<span class="screen-reader-only">Important</span>📊 What You’re Really Being Graded On
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -515,6 +623,88 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <p><strong>Remember:</strong> Less is more. A focused, punchy report that Patrick can understand and act on is better than a long, complex analysis that confuses him.</p>
 </section>
 </section>
+<section id="report-outline-for-your-final-patrick-facing-report" class="level2">
+<h2 class="anchored" data-anchor-id="report-outline-for-your-final-patrick-facing-report">Report outline (for your final Patrick-facing report)</h2>
+<p>Use this skeleton when you replace challenge instructions with the finished analysis. Keep it short (about 1–5 printed pages), plain language, and focused on decisions.</p>
+<section id="opening" class="level3">
+<h3 class="anchored" data-anchor-id="opening">Opening</h3>
+<ul>
+<li><strong>Purpose:</strong> Answer where and when Patrick should schedule himself to maximize cars fixed (and thus revenue), given one shop per day.</li>
+<li><strong>Data in scope:</strong> 250 daily rows in <code>carsFixed.csv</code>: <code>shopID</code> (1–5), <code>boss</code> (0 = absent, 1 = present), <code>carsFixed</code> (cars repaired that day).</li>
+<li><strong>Evidence:</strong> Usually <strong>no chart yet</strong>—one short paragraph only. Optionally a tiny <strong>table of contents for figures</strong> if the report grows past two pages (otherwise skip).</li>
+</ul>
+</section>
+<section id="where-graphs-and-tables-belong-general-rule" class="level3">
+<h3 class="anchored" data-anchor-id="where-graphs-and-tables-belong-general-rule">Where graphs and tables belong (general rule)</h3>
+<ul>
+<li>Put each figure or table <strong>immediately after</strong> the paragraph that states the claim it supports—not bundled at the end of the document.</li>
+<li>In Quarto, use <code>#| label:</code> and <code>#| fig-cap:</code> / <code>#| tbl-cap:</code> so Patrick sees a clear title on every graphic or summary table.</li>
+<li>In the prose, point to the evidence in plain language (“The scatterplot below shows all 250 days…”) so the story reads top-to-bottom.</li>
+<li><strong>Opening vs proof:</strong> Save detailed plots for Sections <strong>1–4</strong>; the Opening sets context only.</li>
+</ul>
+</section>
+<section id="what-does-the-data-show" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-data-show">1. What does the data show?</h3>
+<ul>
+<li><strong>Full historical picture:</strong> One visualization that shows <strong>all 250 observations</strong> (e.g., jitter, transparency, or faceting) so overlap does not hide days.</li>
+<li><strong>By shop and boss:</strong> Compare productivity when Patrick is present vs absent at each <code>shopID</code>.</li>
+<li><strong>Main takeaway:</strong> Which shops gain the most from his presence, which gain little, and which patterns stand out (including any nuance for Shop 3 if it matters to the story).</li>
+<li><strong>Evidence (typical order in the finished report):</strong>
+<ul>
+<li><strong>Figure 1 — All 250 days:</strong> Strip/swarm/scatter or faceted plot with every row visible (required rubric item). Place this <strong>first</strong> in Section 1 so Patrick sees the full history before summaries.</li>
+<li><strong>Figure 2 (optional if merged into Fig 1):</strong> Same data summarized visually by shop—e.g., side-by-side or overlaid distributions for <code>boss = 0</code> vs <code>boss = 1</code> <strong>within each <code>shopID</code></strong> (violin, box, or jittered points by shop).</li>
+<li><strong>Table 1 (optional but helpful):</strong> Compact counts and means (and maybe standard deviation) by <code>shopID</code> × <code>boss</code>—supports your sentences about “which shop jumps the most.” You already have summary code earlier in this document; reuse that logic here when you write the final report.</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-should-patrick-do" class="level3">
+<h3 class="anchored" data-anchor-id="what-should-patrick-do">2. What should Patrick do?</h3>
+<ul>
+<li><strong>Scheduling priorities:</strong> Specific guidance—which shops deserve more of his days and which need him less (or not based on the data).</li>
+<li><strong>Financial angle:</strong> Translate cars fixed into revenue (assume a simple dollars-per-car rate and state it clearly) and summarize upside of better scheduling in everyday terms.</li>
+<li><strong>Action list:</strong> Short, numbered “do this next week / this month” items Patrick can follow without rereading the whole report.</li>
+<li><strong>Evidence:</strong>
+<ul>
+<li><strong>Figure or Table — “Lift” by shop:</strong> One graphic or small table showing the <strong>difference</strong> in average <code>carsFixed</code> (present minus absent, or ratio) <strong>per shop</strong>—this directly backs “prioritize Shop X.”</li>
+<li><strong>Table — Dollars (optional):</strong> Same priorities translated to revenue/profit using your stated rate—place <strong>right under</strong> the paragraph where you first mention dollars.</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-confident-can-patrick-be-1" class="level3">
+<h3 class="anchored" data-anchor-id="how-confident-can-patrick-be-1">3. How confident can Patrick be?</h3>
+<ul>
+<li><strong>Sample size:</strong> Plain-language reminder that 250 days is useful but not huge—patterns can shift.</li>
+<li><strong>Ranges, not just points:</strong> Describe how big differences might reasonably be (e.g., rough bands or intervals) so Patrick knows what swing to expect.</li>
+<li><strong>Honest limits:</strong> What could make the plan wrong (seasonality, staff changes, special events). State assumptions in one short paragraph.</li>
+<li><strong>Evidence:</strong>
+<ul>
+<li><strong>Figure — Uncertainty:</strong> Error bars, bootstrap intervals, or simple “low / middle / high” scenario bands <strong>per shop</strong> (or for the lifts you recommended). Place this <strong>after</strong> you introduce why raw averages aren’t guaranteed for every future week.</li>
+<li><strong>Table (optional):</strong> Sample sizes per shop × boss so Patrick sees which comparisons rest on fewer boss-present days.</li>
+</ul></li>
+</ul>
+</section>
+<section id="what-does-the-future-look-like" class="level3">
+<h3 class="anchored" data-anchor-id="what-does-the-future-look-like">4. What does the future look like?</h3>
+<ul>
+<li><strong>Scenarios:</strong> At least <strong>one</strong> chart comparing projected cars (or revenue) under a few concrete schedules (e.g., “more days at Shop X,” “status quo,” “favor brother’s shop”).</li>
+<li><strong>Bridge to decision:</strong> Tie the scenario chart back to the recommendations in Section 2.</li>
+<li><strong>Evidence:</strong>
+<ul>
+<li><strong>Figure — Scenarios (required):</strong> Bar or line chart of <strong>projected</strong> total cars (or revenue) over a planning horizon for <strong>2–4 scheduling policies</strong>. Put this figure <strong>after</strong> you name the scenarios in words (“If Patrick spends half his days at…”).</li>
+<li>Refer back to <strong>Figure/table from Section 2</strong> in one sentence so Patrick connects “what we saw” to “what we expect if we change the calendar.”</li>
+</ul></li>
+</ul>
+</section>
+<section id="closing" class="level3">
+<h3 class="anchored" data-anchor-id="closing">Closing</h3>
+<ul>
+<li><strong>Bottom line:</strong> One tight summary—what to schedule, what to watch, and when to revisit the analysis.</li>
+<li><strong>Evidence:</strong> Normally <strong>no new charts</strong>—refer to Figure numbers already shown so the ending stays punchy.</li>
+</ul>
+<hr>
+<p><em>When the report is final for Patrick, remove this outline section along with the rest of the challenge instructions, rubric, and checklist so the HTML contains only analysis, visuals, and recommendations.</em></p>
+</section>
+</section>
 <section id="technical-implementation-preferences" class="level2">
 <h2 class="anchored" data-anchor-id="technical-implementation-preferences">Technical Implementation Preferences 💡</h2>
 <section id="setting-up-your-analysis" class="level3">
@@ -538,45 +728,8 @@ Table&nbsp;2: Summary statistics by shop and boss presence
 <section id="data-loading" class="level3">
 <h3 class="anchored" data-anchor-id="data-loading">Data Loading</h3>
 <p>The data file <code>carsFixed.csv</code> is included in your repository. Load it using pandas:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>carsDF <span class="op">=</span> pd.read_csv(<span class="st">"carsFixed.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="submission-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist ✅</h2>
-<p><strong>Technical Requirements:</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Forked repository <code>decAdvocacyChallenge</code> from the starter repository</label></li>
-<li><label><input type="checkbox">Cloned repository locally using Cursor (or VS Code)</label></li>
-<li><label><input type="checkbox">Quarto document created with clear narrative (use this <code>index.qmd</code> as a starting point)</label></li>
-<li><label><input type="checkbox">Document rendered to HTML successfully</label></li>
-<li><label><input type="checkbox">HTML files uploaded to your repository</label></li>
-<li><label><input type="checkbox">GitHub Pages enabled and working</label></li>
-<li><label><input type="checkbox">Site accessible at <code>https://[your-username].github.io/decAdvocacyChallenge/</code></label></li>
-</ul>
-<p><strong>Report Quality Requirements:</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox"><strong>Conciseness:</strong> Report is 1-5 printed pages (not a novel)</label></li>
-<li><label><input type="checkbox"><strong>Simplicity:</strong> Written so an auto-mechanic can understand (no unnecessary jargon)</label></li>
-<li><label><input type="checkbox"><strong>Beautiful visualizations:</strong> Clean, clear charts that tell the story with persuasive titles, meaningful labels, and useful annotations.</label></li>
-<li><label><input type="checkbox"><strong>All 250 data points visible:</strong> Historical data shows all observations, not just summaries (on one of the visualizations)</label></li>
-<li><label><input type="checkbox"><strong>Logical recommendations:</strong> Defensible advice based on the data</label></li>
-<li><label><input type="checkbox"><strong>Confidence assessment:</strong> Uncertainty explained in plain terms Patrick can understand</label></li>
-<li><label><input type="checkbox"><strong>Future scenarios:</strong> At least one visualization showing projected outcomes</label></li>
-<li><label><input type="checkbox"><strong>Clean final report:</strong> All challenge instructions, setup guides, and grading rubrics removed from final HTML</label></li>
-<li><label><input type="checkbox"><strong>Hidden code:</strong> Code is hidden in final report (must be in source .qmd file)</label></li>
-</ul>
-<section id="resources" class="level3">
-<h3 class="anchored" data-anchor-id="resources">Resources</h3>
-<ul>
-<li><strong>Quarto Markdown:</strong> <a href="https://quarto.org/docs/authoring/markdown-basics.html">quarto.org/docs/authoring/markdown-basics.html</a></li>
-<li><strong>Quarto Documentation:</strong> <a href="https://quarto.org/docs">quarto.org/docs</a></li>
-<li><strong>Python Data Science Handbook:</strong> <a href="https://jakevdp.github.io/PythonDataScienceHandbook">jakevdp.github.io/PythonDataScienceHandbook</a></li>
-<li><strong>Pandas Documentation:</strong> <a href="https://pandas.pydata.org/docs">pandas.pydata.org/docs</a></li>
-<li><strong>Matplotlib Gallery:</strong> <a href="https://matplotlib.org/stable/gallery">matplotlib.org/stable/gallery</a></li>
-<li><strong>Seaborn Tutorial:</strong> <a href="https://seaborn.pydata.org/tutorial.html">seaborn.pydata.org/tutorial.html</a></li>
-</ul>
-</section>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>carsDF <span class="op">=</span> pd.read_csv(<span class="st">"carsFixed.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 
@@ -633,13 +786,14 @@ Table&nbsp;2: Summary statistics by shop and boss presence
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
