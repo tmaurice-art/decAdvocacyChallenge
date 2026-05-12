@@ -1,89 +1,47 @@
 ---
 title: "Decision Advocacy Challenge"
-subtitle: "Data-Driven Scheduling for Maximum Productivity"
+subtitle: "Data-driven scheduling for maximum productivity"
+author: "Trey"
+language:
+  title-block-author-single: "Report Prepared By"
+  title-block-author-plural: "Report Prepared By"
 format:
-  html: default
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    title-block-banner: true
+    page-layout: article
+    fig-align: center
 execute:
-  echo: true
-  eval: true
+  echo: false
+  warning: false
+  message: false
 ---
 
-**The Core Question:** When and where should Patrick schedule his presence to maximize productivity and revenue?
-
-**Key Considerations:**
-
-- Patrick can only be at one shop per day
-- Different shops may respond differently to his presence
-- Revenue depends on number of cars fixed (assume a fixed price per car)
-- Historical patterns may not predict future performance perfectly
-- Patrick loves visiting his brother who runs Shop 3
-
-::: {.callout-important}
-## 🎯 The Key Insight: Data-Driven Decision Making
-
-**The problem:** Patrick needs to make scheduling decisions based on data, not intuition. He needs to understand:
-
-- Which shops benefit most from his presence?
-- Are there patterns by shop that suggest different strategies?
-- What are the revenue and profit implications of different scheduling scenarios?
-- How confident can he be in these recommendations?
-
-**Why this matters:** Poor scheduling decisions can lead to:
-
-- Wasted time (Patrick at shops that don't need him)
-- Lost revenue (shops that need him but don't get him)
-
-**The connection:** This is a real-world decision problem where data analysis can directly impact business outcomes. Your job is to make the data tell a clear, actionable story.
-:::
-
-## The Data 📊
-
-The dataset contains 250 observations of daily productivity across 5 shops:
-
 ```{python}
-#| echo: false
 #| include: false
 import pandas as pd
 
-# Load the data
 carsDF = pd.read_csv("carsFixed.csv")
 ```
 
-```{python}
-#| label: tbl-data-overview
-#| tbl-cap: "Overview of the productivity data"
-#| echo: true
-carsDF.head(10)
-```
 
-**Data Dictionary:**
+## Daily outcomes by shop
 
-- `observation`: Observation number (1-250)
-- `shopID`: Shop identifier (1-5)
-- `boss`: Binary indicator (0 = boss absent, 1 = boss present)
-- `carsFixed`: Number of cars fixed that day
-
-```{python}
-#| label: tbl-data-summary
-#| tbl-cap: "Summary statistics by shop and boss presence"
-#| echo: true
-summary = carsDF.groupby(['shopID', 'boss'])['carsFixed'].agg(['count', 'mean', 'std', 'min', 'max']).round(2)
-summary
-```
-
-The chart below plots **every day** in the dataset: each dot is one observation. Shops sit along the horizontal axis; vertical position is how many cars were fixed that day. Blue dots are days Patrick was elsewhere; orange dots are days he was at that shop.
+Each point is one day: shop on the horizontal axis, cars fixed on the vertical. Blue is Patrick absent; orange is Patrick present. The clouds show how much presence shifts typical performance.
 
 ```{python}
 #| label: fig-cars-all-days
 #| fig-cap: "Cars fixed per day by shop and whether Patrick was on site (all 250 observations)"
 #| fig-width: 10
 #| fig-height: 6
-#| echo: true
 
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-sns.set_theme(style="whitegrid")
+sns.set_theme(style="whitegrid", context="talk", font_scale=0.9)
 
 fig, ax = plt.subplots(figsize=(10, 6))
 sns.stripplot(
@@ -93,37 +51,28 @@ sns.stripplot(
     hue="boss",
     dodge=True,
     jitter=0.25,
-    alpha=0.65,
+    alpha=0.7,
     size=5,
-    palette={0: "#4C78A8", 1: "#F58518"},
+    palette={0: "#3366CC", 1: "#DC3912"},
 )
-ax.set_xlabel("Shop ID")
+ax.set_xlabel("Shop")
 ax.set_ylabel("Cars fixed that day")
 handles, _ = ax.get_legend_handles_labels()
-ax.legend(handles, ["Patrick absent", "Patrick present"], title="")
+ax.legend(handles, ["Patrick absent", "Patrick present"], title="", frameon=True)
 plt.tight_layout()
 ```
 
-## Findings and recommendations
+Patrick’s presence raises cars fixed at every shop, but the gap differs. Shop 4 shows the clearest separation between absent and present days; shops 3 and 5 overlap more, meaning a smaller marginal gain from a visit.
 
-### What the data shows
+## Average lift by shop
 
-The summary table (@tbl-data-summary) and the strip plot of all 250 days (@fig-cars-all-days) tell a consistent story: **Patrick’s presence raises cars fixed at every shop**, but the **size of that bump is not the same everywhere**.
-
-- **Shop 4** shows the largest average gain when you are on site: about **13 more cars per day** when you are there versus when you are away (roughly 37 cars absent vs 50 present). The orange cloud sits clearly above the blue cloud in the plot.
-- **Shop 2** is next, with about **10 more cars per day** on average when you are there (roughly 22 vs 32).
-- **Shop 5** gains about **8 cars per day** on average (roughly 46 vs 54).
-- **Shop 1** gains about **7 cars per day** on average (roughly 11 vs 18).
-- **Shop 3** (your brother’s shop) still improves when you visit—about **3 more cars per day** on average (roughly 32 vs 35)—but that is the **smallest lift** in the group. Many absent days at Shop 3 are already as productive as some present days elsewhere.
-
-If you think in terms of the **whole five-shop day** (you can only be at one shop), the data also suggests **where** you show up matters for **total cars across all shops** in a day: using the long-run averages, a day where you work at **Shop 4** lines up with the highest expected **fleet-wide** total, because Shop 4’s jump is large while the other shops still run near their “you’re elsewhere” baselines.
+“Lift” is the extra cars per day when Patrick is present versus absent, using long-run averages in this sample.
 
 ```{python}
 #| label: fig-lift-by-shop
-#| fig-cap: "Average extra cars fixed on days Patrick is present versus absent (lift), by shop"
+#| fig-cap: "Average extra cars fixed when Patrick is present versus absent, by shop"
 #| fig-width: 8
 #| fig-height: 5
-#| echo: false
 
 lift = (
     carsDF.groupby(["shopID", "boss"])["carsFixed"]
@@ -134,44 +83,26 @@ lift.columns = ["absent", "present"]
 lift["lift"] = lift["present"] - lift["absent"]
 
 fig, ax = plt.subplots(figsize=(8, 5))
-bars = ax.bar(lift.index.astype(str), lift["lift"], color="#2CA02C", edgecolor="white")
-ax.set_xlabel("Shop ID")
-ax.set_ylabel("Extra cars per day (present minus absent)")
-ax.axhline(0, color="gray", linewidth=1)
+bars = ax.bar(lift.index.astype(str), lift["lift"], color="#109618", edgecolor="white", linewidth=0.8)
+ax.set_xlabel("Shop")
+ax.set_ylabel("Extra cars per day (present − absent)")
+ax.axhline(0, color="#333333", linewidth=0.8, linestyle="--", alpha=0.6)
 for b, v in zip(bars, lift["lift"]):
-    ax.text(b.get_x() + b.get_width() / 2, v + 0.25, f"{v:.1f}", ha="center", va="bottom", fontsize=10)
+    ax.text(b.get_x() + b.get_width() / 2, v + 0.25, f"{v:.1f}", ha="center", va="bottom", fontsize=11)
 plt.tight_layout()
 ```
 
-@fig-lift-by-shop makes the ranking obvious: **4, 2, 5, 1, 3** from highest lift to lowest.
+Ranking by lift in this dataset: **4, 2, 5, 1, 3** (highest to lowest). That ordering is the backbone of a productivity-first calendar: overweight high-lift shops unless there is a deliberate non-productivity reason to be elsewhere.
 
-### What Patrick should do
+## How stable is that ranking?
 
-**Scheduling priority (productivity-first):** Put the bulk of your on-site days toward **Shop 4**, then **Shop 2**, then **Shop 5**, then **Shop 1**, and treat **Shop 3** as the lowest priority **if the goal is maximizing cars fixed**. That does **not** say Shop 3 is “bad”—it says the data shows the **marginal gain** from your being there is smaller than at the other shops.
-
-**Money (illustrative):** If you use a simple rule of thumb like **\$200 revenue per car** (swap in your real number), then an **extra 10 cars** in a day is about **\$2,000** more revenue that day. A sustained lift of ~13 cars at Shop 4 is on the order of **\$2,600** more revenue on a typical “you’re there” day versus a typical “you’re away” day—**before** costs—so stacking more high-lift days is where the upside concentrates.
-
-**Practical next steps:**
-
-1. **Bias the calendar toward Shop 4** when nothing unusual is going on (staffing, emergencies, family events).
-2. **Keep Shop 2 and Shop 5** as regular second-tier visits so those larger lifts do not get starved.
-3. **Use Shop 3 for relationship time** when you want to see your brother, but know you are **leaving measurable cars-and-dollars on the table** compared with spending that same day at Shop 4 or Shop 2—trade that off on purpose, not by accident.
-
-### How confident can Patrick be?
-
-You have **250 days** total. That is enough to see **directions** (who benefits more), but not enough to treat every average as exact forever.
-
-- The **noisiest estimates** are where you have **few boss-present days** in the history: **Shop 2 and Shop 4 each only have 5 “you were there” days** in this file. Averages from five days can move a lot if one week was unusual.
-- **Shops 1, 3, and 5** have **10–15** present-day rows each, which is more stable, but still not “forever true.”
-
-The bootstrap chart below resamples your own data many times and shows a **plausible range** for each shop’s lift (rough “low to high” band). Wider bands mean “expect more swing week to week.”
+Bootstrap resampling (3,000 runs) gives an approximate 90% range for each shop’s lift. Wide intervals mean the sample is still noisy—especially where there are few “boss present” days.
 
 ```{python}
 #| label: fig-lift-bootstrap
-#| fig-cap: "Bootstrap 90% intervals for average lift (present minus absent) by shop—wider means less certainty from this sample"
+#| fig-cap: "Bootstrap 90% intervals for average lift by shop (wider = more uncertainty in this sample)"
 #| fig-width: 9
 #| fig-height: 5
-#| echo: false
 
 import numpy as np
 
@@ -195,28 +126,35 @@ for s in shops:
 
 fig, ax = plt.subplots(figsize=(9, 5))
 x = np.arange(len(shops))
-ax.bar(x, medians, color="#9467BD", label="Bootstrap median lift")
-ax.errorbar(x, medians, yerr=[np.array(medians) - np.array(lows), np.array(highs) - np.array(medians)], fmt="none", ecolor="black", capsize=4)
+ax.bar(x, medians, color="#6A51A3", alpha=0.9, label="Bootstrap median lift")
+ax.errorbar(
+    x,
+    medians,
+    yerr=[np.array(medians) - np.array(lows), np.array(highs) - np.array(medians)],
+    fmt="none",
+    ecolor="#222222",
+    capsize=4,
+    linewidth=1.2,
+)
 ax.set_xticks(x)
 ax.set_xticklabels([str(int(s)) for s in shops])
-ax.set_xlabel("Shop ID")
+ax.set_xlabel("Shop")
 ax.set_ylabel("Lift (cars per day)")
-ax.legend()
+ax.legend(loc="upper right", frameon=True)
 plt.tight_layout()
 ```
 
-**What could make this wrong later:** staffing changes, a big customer next door to one shop, seasonality, or a run of “lucky” weeks in the sample. Revisit the chart **once or twice a year** or after any major change.
+Shops 2 and 4 have only five “present” days each in this file, so their averages can move if one week was unusual. Shops 1, 3, and 5 have more present-day rows and look somewhat tighter, but this is still a finite window—not a guarantee for all future seasons.
 
-### What the future could look like (simple scenarios)
+## Fleet-level scenarios
 
-The scenario chart compares **expected total cars fixed across all five shops over 50 workdays** under a few clear policies. Each day you pick a shop to visit (everyone else runs without you). Expected cars that day for the whole group uses each shop’s long-run average with you **present** at the visited shop and **absent** everywhere else (same logic as the fleet-wide totals computed from @tbl-data-summary).
+If each day Patrick picks one shop to visit (others run without him), expected fleet cars that day can be built from each shop’s historical mean with him present at the visited shop and absent elsewhere. The bar chart scales that idea to 50 workdays under a few allocation rules.
 
 ```{python}
 #| label: fig-scenarios-fleet
-#| fig-cap: "Illustrative 50-day totals: expected fleet cars under different ways to allocate Patrick’s on-site days"
+#| fig-cap: "Illustrative 50-day expected total cars across all shops under different visit policies"
 #| fig-width: 9
 #| fig-height: 5
-#| echo: false
 
 means = carsDF.groupby(["shopID", "boss"])["carsFixed"].mean()
 absent = np.array([means[(i, 0)] for i in range(1, 6)])
@@ -239,179 +177,35 @@ p_all4 = np.array([0, 0, 0, 1, 0], dtype=float)
 p_bro = np.array([0.15, 0.15, 0.40, 0.15, 0.15], dtype=float)
 
 labels = ["Historical mix", "Equal across shops", "Every day at Shop 4", "Brother-heavy (40% at Shop 3)"]
-totals = [fleet_expected_total(p_hist), fleet_expected_total(p_equal), fleet_expected_total(p_all4), fleet_expected_total(p_bro)]
+totals = [
+    fleet_expected_total(p_hist),
+    fleet_expected_total(p_equal),
+    fleet_expected_total(p_all4),
+    fleet_expected_total(p_bro),
+]
 
 fig, ax = plt.subplots(figsize=(9, 5))
-colors = ["#7F7F7F", "#1F77B4", "#2CA02C", "#FF7F0E"]
-ax.bar(labels, totals, color=colors, edgecolor="white")
+colors = ["#5C6770", "#3366CC", "#109618", "#FF9900"]
+bars = ax.bar(labels, totals, color=colors, edgecolor="white", linewidth=0.8)
 ax.set_ylabel("Expected total cars (50 days, all shops)")
-ax.tick_params(axis="x", rotation=15)
+ax.tick_params(axis="x", rotation=12)
 for i, t in enumerate(totals):
-    ax.text(i, t + 20, f"{t:.0f}", ha="center", va="bottom", fontsize=10)
+    ax.text(i, t + 25, f"{t:.0f}", ha="center", va="bottom", fontsize=11)
 plt.tight_layout()
 ```
 
-@fig-scenarios-fleet is not a forecast with weather-grade precision—it is a **straight-line projection** using your historical averages. Still, it answers Patrick’s “what if I changed the calendar?” question in plain terms: **moving weight toward Shop 4** shows the largest jump in expected fleet output among these options, while **tilting extra days to Shop 3** drags expected totals **down** relative to a more balanced or Shop-4-heavy plan.
-
-### Bottom line
-
-The data supports a **productivity-first** schedule that **overweights Shop 4**, keeps **Shop 2 and Shop 5** in regular rotation, and treats **Shop 3** as a **personal** rather than **productivity** priority. Uncertainty is real—especially for Shops **2** and **4** where you have few “present” days on record—so use these results as a **strong default**, not an unbreakable rule, and refresh when the business changes.
-
-## Challenge Requirements 📋
-
-### Minimum Requirements for Any Points on Challenge
-
-1. **Create a Quarto Document:** Write a comprehensive quarto markdown file structured as a professional business report. Your final rendered HTML should be a polished, client-ready document that Patrick can use to make decisions. **Important:** Your final rendered HTML should contain only your analysis and recommendations—all challenge instructions, setup guides, and grading rubrics should be removed from the final report.
-
-2. **Render to HTML:** You must render the quarto markdown file to HTML.
-
-3. **GitHub Repository:** Create a repository named `decAdvocacyChallenge` in your GitHub account. Upload your rendered HTML files to this repository.
-
-4. **GitHub Pages Setup:** The repository should be made the source of your GitHub Pages:
-   - Go to your repository settings (click the "Settings" tab in your GitHub repository)
-   - Scroll down to the "Pages" section in the left sidebar
-   - Under "Source", select "Deploy from a branch"
-   - Choose "main" branch and "/ (root)" folder
-   - Click "Save"
-   - Your site will be available at: `https://[your-username].github.io/decAdvocacyChallenge/`
-   - **Note:** It may take a few minutes for the site to become available after enabling Pages
-
-## Getting Started: Repository Setup 🚀
-
-::: {.callout-important}
-## 📁 Quick Start
-
-**Step 1:** Create a new repository named `decAdvocacyChallenge` in your GitHub account by forking the starter repository at [https://github.com/flyaflya/decAdvocacyChallenge.git](https://github.com/flyaflya/decAdvocacyChallenge.git)
-
-**Step 2:** Clone the repository locally using Cursor (or VS Code)
-
-**Step 3:** The data file `carsFixed.csv` is already included in this repository. The code will load it from the local file.
-
-**Step 4:** You're ready to start! Modify this `index.qmd` file and begin your analysis.
-:::
-
-::: {.callout-tip}
-## 💡 Why This Approach?
-
-**Benefits:**
-
-- **Real-world application:** You're solving an actual business problem
-- **Data-driven insights:** Learn to extract actionable insights from data
-- **Professional presentation:** Create a report that a real client would use
-- **Visual storytelling:** Master the art of data visualization for decision-making
-:::
-
-### What Your Report Should Include
-
-Your report should answer these questions in a clear, concise way:
-
-1. **What does the data show?**
-
-   - Visualize all 250 data points showing productivity by shop and boss presence
-   - Which shops benefit most from Patrick's presence? Which don't?
-
-2. **What should Patrick do?**
-
-   - Clear, specific recommendations: Which shops should he prioritize? Why?
-   - What's the potential financial impact? (Revenue or profit implications)
-
-3. **How confident can Patrick be?**
-
-   - Explain uncertainty in plain terms an auto-mechanic can understand
-   - What ranges of differences can he expect? (We only have 250 days—that's not a huge sample)
-   - What could go wrong? What assumptions are you making?
-
-4. **What does the future look like?**
-
-   - Show at least one visualization of projected outcomes under different scheduling scenarios
-   - Help Patrick see the potential impact of following your recommendations
-
-**Remember:** Less is more. A focused, punchy report that Patrick can understand and act on is better than a long, complex analysis that confuses him.
-
-## Report outline (for your final Patrick-facing report)
-
-Use this skeleton when you replace challenge instructions with the finished analysis. Keep it short (about 1–5 printed pages), plain language, and focused on decisions.
-
-### Opening
-
-- **Purpose:** Answer where and when Patrick should schedule himself to maximize cars fixed (and thus revenue), given one shop per day.
-- **Data in scope:** 250 daily rows in `carsFixed.csv`: `shopID` (1–5), `boss` (0 = absent, 1 = present), `carsFixed` (cars repaired that day).
-- **Evidence:** Usually **no chart yet**—one short paragraph only. Optionally a tiny **table of contents for figures** if the report grows past two pages (otherwise skip).
-
-### Where graphs and tables belong (general rule)
-
-- Put each figure or table **immediately after** the paragraph that states the claim it supports—not bundled at the end of the document.
-- In Quarto, use `#| label:` and `#| fig-cap:` / `#| tbl-cap:` so Patrick sees a clear title on every graphic or summary table.
-- In the prose, point to the evidence in plain language (“The scatterplot below shows all 250 days…”) so the story reads top-to-bottom.
-- **Opening vs proof:** Save detailed plots for Sections **1–4**; the Opening sets context only.
-
-### 1. What does the data show?
-
-- **Full historical picture:** One visualization that shows **all 250 observations** (e.g., jitter, transparency, or faceting) so overlap does not hide days.
-- **By shop and boss:** Compare productivity when Patrick is present vs absent at each `shopID`.
-- **Main takeaway:** Which shops gain the most from his presence, which gain little, and which patterns stand out (including any nuance for Shop 3 if it matters to the story).
-- **Evidence (typical order in the finished report):**
-  - **Figure 1 — All 250 days:** Strip/swarm/scatter or faceted plot with every row visible (required rubric item). Place this **first** in Section 1 so Patrick sees the full history before summaries.
-  - **Figure 2 (optional if merged into Fig 1):** Same data summarized visually by shop—e.g., side-by-side or overlaid distributions for `boss = 0` vs `boss = 1` **within each `shopID`** (violin, box, or jittered points by shop).
-  - **Table 1 (optional but helpful):** Compact counts and means (and maybe standard deviation) by `shopID` × `boss`—supports your sentences about “which shop jumps the most.” You already have summary code earlier in this document; reuse that logic here when you write the final report.
-
-### 2. What should Patrick do?
-
-- **Scheduling priorities:** Specific guidance—which shops deserve more of his days and which need him less (or not based on the data).
-- **Financial angle:** Translate cars fixed into revenue (assume a simple dollars-per-car rate and state it clearly) and summarize upside of better scheduling in everyday terms.
-- **Action list:** Short, numbered “do this next week / this month” items Patrick can follow without rereading the whole report.
-- **Evidence:**
-  - **Figure or Table — “Lift” by shop:** One graphic or small table showing the **difference** in average `carsFixed` (present minus absent, or ratio) **per shop**—this directly backs “prioritize Shop X.”
-  - **Table — Dollars (optional):** Same priorities translated to revenue/profit using your stated rate—place **right under** the paragraph where you first mention dollars.
-
-### 3. How confident can Patrick be?
-
-- **Sample size:** Plain-language reminder that 250 days is useful but not huge—patterns can shift.
-- **Ranges, not just points:** Describe how big differences might reasonably be (e.g., rough bands or intervals) so Patrick knows what swing to expect.
-- **Honest limits:** What could make the plan wrong (seasonality, staff changes, special events). State assumptions in one short paragraph.
-- **Evidence:**
-  - **Figure — Uncertainty:** Error bars, bootstrap intervals, or simple “low / middle / high” scenario bands **per shop** (or for the lifts you recommended). Place this **after** you introduce why raw averages aren’t guaranteed for every future week.
-  - **Table (optional):** Sample sizes per shop × boss so Patrick sees which comparisons rest on fewer boss-present days.
-
-### 4. What does the future look like?
-
-- **Scenarios:** At least **one** chart comparing projected cars (or revenue) under a few concrete schedules (e.g., “more days at Shop X,” “status quo,” “favor brother’s shop”).
-- **Bridge to decision:** Tie the scenario chart back to the recommendations in Section 2.
-- **Evidence:**
-  - **Figure — Scenarios (required):** Bar or line chart of **projected** total cars (or revenue) over a planning horizon for **2–4 scheduling policies**. Put this figure **after** you name the scenarios in words (“If Patrick spends half his days at…”).
-  - Refer back to **Figure/table from Section 2** in one sentence so Patrick connects “what we saw” to “what we expect if we change the calendar.”
-
-### Closing
-
-- **Bottom line:** One tight summary—what to schedule, what to watch, and when to revisit the analysis.
-- **Evidence:** Normally **no new charts**—refer to Figure numbers already shown so the ending stays punchy.
+This is a straight-line projection from historical averages, not a full forecast—but it answers “what if the calendar changed?” in one glance: shifting weight toward Shop 4 raises expected fleet output among these options; tilting extra days to Shop 3 pulls it down relative to a Shop-4-heavy or balanced plan.
 
 ---
 
-*When the report is final for Patrick, remove this outline section along with the rest of the challenge instructions, rubric, and checklist so the HTML contains only analysis, visuals, and recommendations.*
+## Written report for Patrick
 
-## Technical Implementation Preferences 💡
+**Purpose.** This note turns the charts above into a single decision-facing summary: where your time moves the needle most, how sure we can be, and what a few simple calendar rules imply for total cars across all shops.
 
-### Setting Up Your Analysis
+**What the data shows.** Across 250 days, your being on site is associated with more cars fixed everywhere, but the gain is largest at Shop 4 (on the order of thirteen extra cars per day versus absent days in this sample), then Shop 2 (~ten), Shop 5 (~eight), Shop 1 (~seven), and Shop 3 (~three). Shop 3—your brother’s—is still better when you visit, but the marginal productivity gain is the smallest of the five. For fleet-wide thinking, a day spent at Shop 4 lines up with the highest expected total cars given how large its jump is while other shops stay near their “you’re elsewhere” baselines.
 
-- Use `pandas` for data manipulation
-- Use `matplotlib` and `seaborn` for visualizations
-- Use `numpy` for numerical calculations if needed
-- Consider using `scipy` for statistical tests if helpful
+**Recommendations (productivity-first).** Bias on-site days toward Shop 4, keep Shop 2 and Shop 5 in regular rotation, use Shop 1 as needed, and treat Shop 3 as the lowest scheduling priority when the goal is maximizing cars fixed—not because Shop 3 is failing, but because the data says the incremental return to your presence is smaller there. If you use a rough figure such as \$200 revenue per car, a sustained lift on the scale seen at Shop 4 translates to materially higher revenue on “you’re there” days before costs; the exact dollars should use your real pricing.
 
-### Visualization Preferences
+**Confidence.** Two hundred fifty days is enough to read direction and rough ranking, not to freeze every average as permanent truth. Uncertainty is largest for lifts driven by very few present-day observations (notably Shops 2 and 4 in this extract). Treat the ranking as a strong default; refresh after staffing changes, major accounts, or seasonality shifts.
 
-- **Professional Styling:** Use consistent colors, clear labels, readable fonts, and informative titles
-- **Show All Points:** When displaying historical data, ensure all 250 observations are visible (use transparency, jitter, or other techniques)
-- **Color Coding:** Use consistent color schemes (e.g., one color for boss present, another for boss absent)
-- **Interactive Elements:** Consider using plotly for interactive visualizations if helpful (optional)
-
-### Data Loading
-
-The data file `carsFixed.csv` is included in your repository. Load it using pandas:
-
-```python
-import pandas as pd
-carsDF = pd.read_csv("carsFixed.csv")
-```
-
+**Scenarios and caveats.** The scenario comparison is illustrative: it assumes historical means continue to hold and ignores richer dynamics. It still clarifies the tradeoff: brother-heavy allocation to Shop 3 costs expected fleet cars versus leaning into Shop 4. 
